@@ -24,7 +24,7 @@ model Produtos {
   id        Int    @id @default(autoincrement())
   name      String
   categoria String
-  preco     Number
+  preco     Float
   descricao String 
   status    Boolean 
 }
