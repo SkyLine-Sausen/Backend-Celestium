@@ -27,8 +27,8 @@ export class UserController {
 
     async create (req: Request, res: Response) {
         try {
-            const { name, email, password } = req.body;
-            const user = await userService.create( name, email, password );
+            const { nickname, email, password } = req.body;
+            const user = await userService.create( nickname, email, password );
             res.status(201).json(user);
         } catch (error) {
             res.status(400).json({ error: 'Erro ao cadastrar usuário' });
@@ -38,9 +38,9 @@ export class UserController {
     async update (req: Request, res: Response) {
         try {
             const id = Number(req.params.id);
-            const { name, email, password }= req.body;
+            const { nickname, email, password }= req.body;
 
-            const user = await userService.update(id,  name, email, password );
+            const user = await userService.update(id,  nickname, email, password );
             res.json(user);
         } catch (err) {
             res.status(500).json({ error: 'Erro ao atualizar usuários' });

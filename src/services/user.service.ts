@@ -12,10 +12,10 @@ export class UserService {
         });
     }
 
-    async create(name: string, email: string, password: string){
+    async create(nickname: string, email: string, password: string){
     const passwordHash = await bcrypt.hash(password, 10);
     return await prisma.user.create({ 
-      data: { name, email, password: passwordHash }
+      data: { nickname, email, password: passwordHash }
     });
   }
 
@@ -25,9 +25,9 @@ export class UserService {
         });
     }
 
-    async update(id: number, name: string, email: string, password: string){
+    async update(id: number, nickname: string, email: string, password: string){
         return prisma.user.update({
-             where: {id}, data: {name, email, password}
+             where: {id}, data: {nickname, email, password}
             });
     }
 

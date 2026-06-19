@@ -12,19 +12,25 @@ datasource db {
   provider = "sqlite"
 }
 
+enum Role {
+  ADMIN
+  CUSTUMER
+}
+
 model User {
   id        Int      @id @default(autoincrement())
-  name      String
+  nickname  String
   email     String   @unique
   password  String
+  role      Role     @default(CUSTUMER)
   createdAt DateTime @default(now())
 }
 
 model Produtos {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   name      String
   categoria String
   preco     Float
-  descricao String 
-  status    Boolean 
+  descricao String
+  status    Boolean
 }
