@@ -1,0 +1,44 @@
+@token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImlhdCI6MTc4MjE1OTQ0NywiZXhwIjoxNzgyMjQ1ODQ3fQ.TWu3HQlCSwKsazu25xjZCQ3TfHAYMr1QeVQP33NwASQ"
+
+GET http://localhost:3005/users
+
+###
+
+//Cria o usuário
+POST http://localhost:3005/users
+Content-Type: application/json
+
+{
+  "nickname": "SkyLine",
+  "email": "arthur@gmail.com",
+  "password": "arthur123"
+}
+
+//Pede o token do usuário
+###
+POST http://localhost:3005/auth
+Content-Type: application/json
+
+{
+  "email": "arthur@gmail.com",
+  "password": "arthur123"
+}
+
+###
+//Login
+POST http://localhost:3005/auth
+Content-Type: application/json
+Authorization: Bearer token
+
+{
+  "email": "arthur@gmail.com",
+  "password": "arthur123"
+}
+
+###
+
+//Deleta usuário
+DELETE http://localhost:3005/users/4
+Authorization: Bearer token
+
+###
