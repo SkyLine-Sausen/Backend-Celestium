@@ -1,32 +1,32 @@
-import type { Request, Response } from "express";
-import { UserService } from "../services/user.service.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import type { Request, Response } from "express"
+import dotenv from "dotenv"
+import { AuthService } from "../services/auth.service.js"
+import { sanitizeEmail } from "../lib/validateInputs.js"
 
-const userService = new UserService();
+
+dotenv.config()
+
+const jwtSecret = process.env.JWT_SECRET || "Default#$%Pass"
+const authService = new AuthService()
 
 export class AuthController {
   async login(req: Request, res: Response) {
     try {
-      const { email, password } = req.body;
-      const user = await userService.findByEmail(email);
-      if (!user) {
-         return res.status(401).json({ error: "Email ou senha incorretos" });
-      }
-      
-      const passwordMatch = await bcrypt.compare(password, user.password);
-      if (!passwordMatch) {
-         return res.status(401).json({ error: "Email ou senha incorretos" });
-      }
-      console.log(req.body)
-      const secret = process.env.JWT_SECRET as string;
-      console.log(secret)
-      const token = jwt.sign({ sub: user.id }, secret, { expiresIn: "24h" });
+      const email = sanitizeEmail(req.body.email)
+      const password = String(req.body.password || "")
 
-      
-      res.json({ token });
-    } catch (error) {
-      res.status(500).json({ error: "Erro ao fazer login" });
+      if (!email || !password) {
+        return res
+          .status(400)
+          .json({ error: "E-mail e senha são obrigatórios" })
+      }
+      // console.log("Login attempt:", { email, password })
+      const dados = await authService.authenticate(jwtSecret, email, password)
+
+      return res.status(200).json(dados)
+    } catch (err) {
+      const status = err.status || 500
+      return res.status(status).json({ error: err.message || "Erro interno" })
     }
   }
 }

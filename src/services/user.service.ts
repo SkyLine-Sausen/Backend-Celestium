@@ -1,40 +1,68 @@
-import { prisma } from "../lb/prisma.js";
+import { prisma } from "../lib/prisma.js"
 import bcrypt from "bcrypt"
+// npm i bcrypt
+// npm i @types/bcrypt -D
 
 export class UserService {
-    async getAll(){
-        return prisma.user.findMany({orderBy: { id: "asc" }});
-    }
-
-    async getById(id: number){
-        return prisma.user.findUnique({ 
-            where: {id} 
-        });
-    }
-
-    async create(nickname: string, email: string, password: string){
-    const passwordHash = await bcrypt.hash(password, 10);
-    return await prisma.user.create({ 
-      data: { nickname, email, password: passwordHash }
-    });
+  async findAll() {
+    return await prisma.user.findMany({
+      orderBy: { id: "asc" },
+    })
   }
 
-    async findByEmail(email: string) {
-      
-        return await prisma.user.findUnique({
-            where: {email}
-        });
+  async findById(id: string) {
+    return await prisma.user.findUnique({
+      where: { id },
+    })
+  }
+
+  async findByEmail(email: string) {
+    console.log(email)
+    return await prisma.user.findUnique({
+      where: { email },
+    })
+  }
+
+  async create(data: {
+    nickname: string
+    email: string
+    password: string
+    role: string
+  }) {
+    const existing = await this.findByEmail(data.email)
+
+    if (existing) {
+      const err = new Error("E-mail já cadastrado")
+      err.status = 409
+      throw err
     }
 
-    async update(id: number, nickname: string, email: string, password: string){
-        return prisma.user.update({
-             where: {id}, data: {nickname, email, password}
-            });
-    }
+    //Desestrutura o objeto "data", separando a senha dos demais
+    const { password, ...anothers } = data
+    //Cria a senha criptografada
+    const passwordHash = await bcrypt.hash(password, 10)
 
-    async delete(id: number){
-        return prisma.user.delete({
-             where: {id} 
-            });
-    }
+    //Passa os campos e a senha criptografada
+    return await prisma.user.create({
+      data: { ...anothers, password: passwordHash },
+      //select: { id: true, name: true, email: true, createdAt: true },
+    })
+  }
+
+  async update(
+    id: number,
+    data: { nickname?: string; password: string; role: string },
+  ) {
+    return await prisma.user.update({
+      where: { id },
+      data,
+      //select: { id: true, name: true, email: true, createdAt: true } // sem password
+    })
+  }
+
+  async delete(id: number) {
+    return await prisma.user.delete({
+      where: { id },
+    })
+  }
 }

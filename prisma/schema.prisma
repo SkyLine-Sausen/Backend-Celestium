@@ -1,8 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../generated/prisma"
@@ -14,23 +12,70 @@ datasource db {
 
 enum Role {
   ADMIN
-  CUSTUMER
+  CUSTOMER
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  nickname  String
-  email     String   @unique
-  password  String
-  role      Role     @default(CUSTUMER)
-  createdAt DateTime @default(now())
+  id       String  @id @default(uuid())
+  nickname String
+  email    String  @unique
+  password String
+  role     Role    @default(CUSTOMER)
+  orders   Order[]
 }
 
-model Produtos {
-  id        Int     @id @default(autoincrement())
-  name      String
-  categoria String
-  preco     Float
-  descricao String
-  status    Boolean
+model Category {
+  id       String    @id
+  label    String
+  icon     String
+  products Product[]
+}
+
+model Product {
+  id          String      @id @default(uuid())
+  name        String
+  categoryId  String
+  category    Category    @relation(fields: [categoryId], references: [id])
+  description String
+  price       Float
+  image       String
+  badge       String?
+  available   Boolean     @default(true)
+  tag         String?
+  rating      Float       @default(0.0)
+  orderItems  OrderItem[]
+}
+
+model OrderStatus {
+  id                Int           @id @default(autoincrement())
+  status            String        @unique
+  label             String
+  color             String
+  icon              String
+  next              String?
+  nextStatusId      Int? // Chave estrangeira para o próximo status
+  next_status       OrderStatus?  @relation("NextStatus", fields: [nextStatusId], references: [id])
+  previous_statuses OrderStatus[] @relation("NextStatus")
+  orders            Order[]
+}
+
+model Order {
+  id        String      @id @default(uuid())
+  userId    String
+  user      User        @relation(fields: [userId], references: [id])
+  statusId  Int         @default(1) // PENDING
+  status    OrderStatus @relation(fields: [statusId], references: [id])
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  items     OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(uuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int
+  value     Float   @default(0)
 }

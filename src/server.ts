@@ -1,23 +1,29 @@
-import express from "express";
-import userRouter from "./routes/user.routes.js";
+import express from "express"
+import userRouter from "./routes/user.routes.js"
+import authRouter from "./routes/auth.routes.js"
+import cors from "cors"
+import productsRouter from "./routes/products.routes.js"
+import categoriesRouter from "./routes/categories.routes.js"
+import ordersRouter from "./routes/orders.routes.js"
+import statusRouter from "./routes/status.routes.js"
 
-import authRouter from "./routes/auth.routes.js";
-import cors from "cors";
+const app = express()
+const PORT = process.env.PORT || 3005
 
-const app = express();
-const PORT = process.env.PORT || 3005;
-
-app.use(express.json());
+app.use(express.json())
 app.use(cors())
 
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
+  res.json({ status: "OK" })
+})
 
-app.use("/users", userRouter);
-
-app.use("/auth", authRouter);
+app.use("/auth", authRouter)
+app.use("/users", userRouter)
+app.use("/products", productsRouter)
+app.use("/categories", categoriesRouter)
+app.use("/orders", ordersRouter)
+app.use("/status", statusRouter)
 
 app.listen(PORT, () => {
-  console.log(`API rodando em http://localhost:${PORT}`);
-});
+  console.log(`API rodando em http://localhost:${PORT}`)
+})
