@@ -36,7 +36,7 @@ export class UserController {
       const nickname = req.body.nickname?.trim() || null
       const email = sanitizeEmail(req.body.email)
       const password = String(req.body.password || "")
-      const role = String(req.body.role || "DEFAULT")
+      const role = String(req.body.role || "CUSTOMER")
 
       const validationError = basicValidationRegister(email, password)
 

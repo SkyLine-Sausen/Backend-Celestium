@@ -27,7 +27,6 @@ export class UserService {
     nickname: string
     email: string
     password: string
-    role: string
   }) {
     const existing = await this.findByEmail(data.email)
 

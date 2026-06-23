@@ -1,12 +1,13 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImlhdCI6MTc4MjIzNTU5MywiZXhwIjoxNzgyMzIxOTkzfQ.i68A6pZLIbZ06DZdzsBMulpJLcGaNZPkjXjKmoWL_rE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJhcnRodXJAZ21haWwuY29tIiwiaWF0IjoxNzgyMjQzNDgxLCJleHAiOjE3ODIyNTA2ODF9.sAz2YcU8U2jpnktTn9lOCk7whjtYBbgD1dTvnib0Dq8
 
 ###
+// STATUS OK
 GET http://localhost:3005/health
 
 
 ####
 GET http://localhost:3005/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImlhdCI6MTc4MjIzNTU5MywiZXhwIjoxNzgyMzIxOTkzfQ.i68A6pZLIbZ06DZdzsBMulpJLcGaNZPkjXjKmoWL_rE
+Authorization: Bearer {{token}}
 
 ###
 
@@ -15,9 +16,9 @@ POST http://localhost:3005/users
 Content-Type: application/json
 
 {
-  "nickname": "SkyLine",
-  "email": "arthur@gmail.com",
-  "password": "arthur123"
+  "nickname": "viado",
+  "email": "viado@gmail.com",
+  "password": "viado123"
 }
 
 //Pede o token do usuário
@@ -34,5 +35,8 @@ Content-Type: application/json
 
 //Deleta usuário
 DELETE http://localhost:3005/users/4
-Authorization: Bearer token
+Authorization: Bearer {{token}}
+
+###
+//Cria um usuário
 
