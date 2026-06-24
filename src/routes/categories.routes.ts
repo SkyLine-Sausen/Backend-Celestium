@@ -6,5 +6,8 @@ const categoriesRouter = express.Router()
 const categoriesController = new CategoriesController()
 
 categoriesRouter.get("/", authMiddleware, categoriesController.getCategories)
+categoriesRouter.post("/", authMiddleware, categoriesController.createCategories)
+
+
 
 export default categoriesRouter

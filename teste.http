@@ -1,17 +1,25 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0IiwiZW1haWwiOiJhcnRodXJAZ21haWwuY29tIiwiaWF0IjoxNzgyMjQzNDgxLCJleHAiOjE3ODIyNTA2ODF9.sAz2YcU8U2jpnktTn9lOCk7whjtYBbgD1dTvnib0Dq8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhOTYzZDRlNC1jNTFhLTQ5ZTUtYjFkNS1hYjlmZTA1YTBjMzciLCJlbWFpbCI6ImFydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE3ODIzMzE4MDYsImV4cCI6MTc4MjMzOTAwNn0.Y2XO6VO9KgGjhBa7JIo1lkPhY6EtM5ZvqSabguiTHiY
+
+
 
 ###
 // STATUS OK
+
 GET http://localhost:3005/health
 
 
+
 ####
+//Mostra os Usuários
+
 GET http://localhost:3005/users
 Authorization: Bearer {{token}}
 
-###
 
+
+###
 //Cria o usuário
+
 POST http://localhost:3005/users
 Content-Type: application/json
 
@@ -21,8 +29,11 @@ Content-Type: application/json
   "password": "viado123"
 }
 
-//Pede o token do usuário
+
+
 ###
+//Pede o token do usuário
+
 POST http://localhost:3005/auth/login
 Content-Type: application/json
 
@@ -31,12 +42,44 @@ Content-Type: application/json
   "password": "arthur123"
 }
 
-###
 
+
+###
 //Deleta usuário
+
 DELETE http://localhost:3005/users/4
 Authorization: Bearer {{token}}
 
-###
-//Cria um usuário
 
+
+###
+//Cria Produto
+
+POST http://localhost:3005/products
+Content-Type: application/json
+
+{
+  "name": "Vip Imperador",
+  "categoryId": "",
+  "description": "",
+  "price": "",
+  "image": "",
+  "badge": "",
+  "available": "",
+  "tag": "",
+  "rating": ""
+}
+
+
+
+###
+//Cria Categoria
+
+POST http://localhost:3005/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "label": "vip",
+  "icon": "image"
+}
