@@ -7,5 +7,6 @@ const productsController = new ProductsController()
 
 productsRouter.get("/", authMiddleware, productsController.getProducts)
 productsRouter.post("/", authMiddleware, productsController.createProduct)
+productsRouter.put("/:id", authMiddleware, productsController.updateProduct)
 
 export default productsRouter

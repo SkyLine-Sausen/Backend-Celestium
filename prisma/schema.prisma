@@ -39,7 +39,6 @@ model Product {
   description String
   price       Float
   image       String
-  badge       String?
   available   Boolean     @default(true)
   tag         String?
   rating      Float       @default(0.0)

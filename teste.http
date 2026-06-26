@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhOTYzZDRlNC1jNTFhLTQ5ZTUtYjFkNS1hYjlmZTA1YTBjMzciLCJlbWFpbCI6ImFydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE3ODIzMzE4MDYsImV4cCI6MTc4MjMzOTAwNn0.Y2XO6VO9KgGjhBa7JIo1lkPhY6EtM5ZvqSabguiTHiY
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhOTYzZDRlNC1jNTFhLTQ5ZTUtYjFkNS1hYjlmZTA1YTBjMzciLCJlbWFpbCI6ImFydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE3ODI0OTcyMDQsImV4cCI6MTc4MjUwNDQwNH0.xuoTRTC41r0iGvhNI6YUjMHaBp9JSBrKaYpQEjM3OFE
 
 
 
@@ -22,6 +22,21 @@ Authorization: Bearer {{token}}
 
 POST http://localhost:3005/users
 Content-Type: application/json
+
+{
+  "nickname": "viado",
+  "email": "viado@gmail.com",
+  "password": "viado123"
+}
+
+
+
+###
+//Atualiza Usuário
+
+PUT http://localhost:3005/products/762b2c54-6bab-49e1-8d16-dafd3598e4e7
+Content-type: application/json
+Authorization: Bearer {{token}}
 
 {
   "nickname": "viado",
@@ -57,17 +72,46 @@ Authorization: Bearer {{token}}
 
 POST http://localhost:3005/products
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Vip Imperador",
-  "categoryId": "",
-  "description": "",
-  "price": "",
+  "categoryId": "3108208f-74b4-426a-a5c2-ee678fc91a60",
+  "description": "Vip Lord com itens dentro do jogo e tag especial",
+  "price": 49.90,
   "image": "",
-  "badge": "",
-  "available": "",
-  "tag": "",
-  "rating": ""
+  "available": true,
+  "tag": "Mais Pedido",
+  "rating": 10
+}
+
+
+
+###
+//Ver Produtos
+
+GET http://localhost:3005/products
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+###
+//Atualiza Produtos
+
+PUT http://localhost:3005/products/762b2c54-6bab-49e1-8d16-dafd3598e4e7
+Content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Vip Imperador",
+  "categoryId": "3108208f-74b4-426a-a5c2-ee678fc91a60",
+  "description": "Vip Lord com itens dentro do jogo e tag especial",
+  "price": 49.90,
+  "image": "",
+  "available": true,
+  "tag": "Mais Pedido",
+  "rating": 10
 }
 
 
@@ -80,6 +124,20 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "label": "vip",
+  "label": "chaves",
+  "icon": "image"
+}
+
+
+
+###
+//Ver Categorias
+
+GET http://localhost:3005/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "label": "chaves",
   "icon": "image"
 }

@@ -16,7 +16,6 @@ export class ProductsController {
       description,
       price,
       image,
-      badge,
       available,
       tag,
       rating,
@@ -27,11 +26,41 @@ export class ProductsController {
       description,
       price,
       image,
-      badge,
       available,
       tag,
       rating,
     })
     res.status(201).json(product)
   }
+
+  async updateProduct (req: Request, res: Response) {
+        try {
+          console.log(req.params.id)
+            const id = String(req.params.id);
+            const { 
+              name, 
+              categoryId, 
+              description, 
+              price, 
+              image, 
+              available, 
+              tag, 
+              rating 
+            }= req.body;
+
+            const produto = await productsService.update(
+              id,  
+              name, 
+              categoryId, 
+              description, 
+              price, image, 
+              available, 
+              tag, 
+              rating 
+            );
+            res.json(produto);
+        } catch (err) {
+            res.status(500).json({ error: 'Erro ao atualizar produto' });
+        }
+    }
 }

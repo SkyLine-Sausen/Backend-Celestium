@@ -15,7 +15,6 @@ export class ProductsService {
     description: string
     price: number
     image: string
-    badge?: string
     available?: boolean
     tag?: string
     rating?: number
@@ -27,4 +26,10 @@ export class ProductsService {
       },
     })
   }
+
+  async update(id: string, name: string, categoryId: string, description: string, price: number, image: string, available: boolean, tag: string, rating: number){
+        return prisma.product.update({
+             where: {id}, data: {name, categoryId, description, price, image, available, tag, rating}
+            });
+    }
 }
