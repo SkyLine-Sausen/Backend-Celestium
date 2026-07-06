@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhOTYzZDRlNC1jNTFhLTQ5ZTUtYjFkNS1hYjlmZTA1YTBjMzciLCJlbWFpbCI6ImFydGh1ckBnbWFpbC5jb20iLCJpYXQiOjE3ODI0OTcyMDQsImV4cCI6MTc4MjUwNDQwNH0.xuoTRTC41r0iGvhNI6YUjMHaBp9JSBrKaYpQEjM3OFE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3ZmQ5MjFiNC0wYjJiLTRhZmEtOWJkYi1lNTI5MDU5MTM1MzciLCJlbWFpbCI6ImFkbUBnbWFpbC5jb20iLCJpYXQiOjE3ODMzNjM2MzEsImV4cCI6MTc4MzM3MDgzMX0.PpemhALKGcri6mkY-SvchYZntGzUmsmP9yXbzbMoHoY
 
 
 
@@ -24,9 +24,10 @@ POST http://localhost:3005/users
 Content-Type: application/json
 
 {
-  "nickname": "viado",
-  "email": "viado@gmail.com",
-  "password": "viado123"
+  "nickname": "adm",
+  "email": "adm@gmail.com",
+  "password": "admin123",
+  "role": "ADMIN"
 }
 
 
@@ -53,8 +54,8 @@ POST http://localhost:3005/auth/login
 Content-Type: application/json
 
 {
-  "email": "arthur@gmail.com",
-  "password": "arthur123"
+  "email": "adm@gmail.com",
+  "password": "admin123"
 }
 
 
@@ -75,14 +76,14 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Vip Imperador",
-  "categoryId": "3108208f-74b4-426a-a5c2-ee678fc91a60",
-  "description": "Vip Lord com itens dentro do jogo e tag especial",
-  "price": 49.90,
+  "name": "Chave Comum",
+  "categoryId": "8bfc8bf7-d385-4cf4-8617-0913f1cb82c8",
+  "description": "Chave Comum (chaves para abrir a Caixa Comum do servidor)",
+  "price": 0.50,
   "image": "",
   "available": true,
-  "tag": "Mais Pedido",
-  "rating": 10
+  "tag": "Bom",
+  "rating": 5
 }
 
 
@@ -141,3 +142,4 @@ Authorization: Bearer {{token}}
   "label": "chaves",
   "icon": "image"
 }
+

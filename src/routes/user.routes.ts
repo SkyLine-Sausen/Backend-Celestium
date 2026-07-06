@@ -9,7 +9,7 @@ const userController = new UserController()
 userRouter.post("/", userController.create)
 
 // PRECISA esta com autenticação - Está sem para uso didático
-userRouter.get("/", userController.getAll)
+userRouter.get("/", allowRoles("ADMIN"), userController.getAll)
 
 // middleware em uma rota específica
 userRouter.put("/:id", authMiddleware, userController.update)
