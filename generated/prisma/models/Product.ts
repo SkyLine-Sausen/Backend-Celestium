@@ -46,6 +46,8 @@ export type ProductMinAggregateOutputType = {
   available: boolean | null
   tag: string | null
   rating: number | null
+  minecraftCommands: string | null
+  server: string | null
 }
 
 export type ProductMaxAggregateOutputType = {
@@ -58,6 +60,8 @@ export type ProductMaxAggregateOutputType = {
   available: boolean | null
   tag: string | null
   rating: number | null
+  minecraftCommands: string | null
+  server: string | null
 }
 
 export type ProductCountAggregateOutputType = {
@@ -70,6 +74,8 @@ export type ProductCountAggregateOutputType = {
   available: number
   tag: number
   rating: number
+  minecraftCommands: number
+  server: number
   _all: number
 }
 
@@ -94,6 +100,8 @@ export type ProductMinAggregateInputType = {
   available?: true
   tag?: true
   rating?: true
+  minecraftCommands?: true
+  server?: true
 }
 
 export type ProductMaxAggregateInputType = {
@@ -106,6 +114,8 @@ export type ProductMaxAggregateInputType = {
   available?: true
   tag?: true
   rating?: true
+  minecraftCommands?: true
+  server?: true
 }
 
 export type ProductCountAggregateInputType = {
@@ -118,6 +128,8 @@ export type ProductCountAggregateInputType = {
   available?: true
   tag?: true
   rating?: true
+  minecraftCommands?: true
+  server?: true
   _all?: true
 }
 
@@ -217,6 +229,8 @@ export type ProductGroupByOutputType = {
   available: boolean
   tag: string | null
   rating: number
+  minecraftCommands: string
+  server: string
   _count: ProductCountAggregateOutputType | null
   _avg: ProductAvgAggregateOutputType | null
   _sum: ProductSumAggregateOutputType | null
@@ -252,8 +266,11 @@ export type ProductWhereInput = {
   available?: Prisma.BoolFilter<"Product"> | boolean
   tag?: Prisma.StringNullableFilter<"Product"> | string | null
   rating?: Prisma.FloatFilter<"Product"> | number
+  minecraftCommands?: Prisma.StringFilter<"Product"> | string
+  server?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   orderItems?: Prisma.OrderItemListRelationFilter
+  deliveries?: Prisma.DeliveryListRelationFilter
 }
 
 export type ProductOrderByWithRelationInput = {
@@ -266,8 +283,11 @@ export type ProductOrderByWithRelationInput = {
   available?: Prisma.SortOrder
   tag?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrder
+  minecraftCommands?: Prisma.SortOrder
+  server?: Prisma.SortOrder
   category?: Prisma.CategoryOrderByWithRelationInput
   orderItems?: Prisma.OrderItemOrderByRelationAggregateInput
+  deliveries?: Prisma.DeliveryOrderByRelationAggregateInput
 }
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
@@ -283,8 +303,11 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   available?: Prisma.BoolFilter<"Product"> | boolean
   tag?: Prisma.StringNullableFilter<"Product"> | string | null
   rating?: Prisma.FloatFilter<"Product"> | number
+  minecraftCommands?: Prisma.StringFilter<"Product"> | string
+  server?: Prisma.StringFilter<"Product"> | string
   category?: Prisma.XOR<Prisma.CategoryScalarRelationFilter, Prisma.CategoryWhereInput>
   orderItems?: Prisma.OrderItemListRelationFilter
+  deliveries?: Prisma.DeliveryListRelationFilter
 }, "id">
 
 export type ProductOrderByWithAggregationInput = {
@@ -297,6 +320,8 @@ export type ProductOrderByWithAggregationInput = {
   available?: Prisma.SortOrder
   tag?: Prisma.SortOrderInput | Prisma.SortOrder
   rating?: Prisma.SortOrder
+  minecraftCommands?: Prisma.SortOrder
+  server?: Prisma.SortOrder
   _count?: Prisma.ProductCountOrderByAggregateInput
   _avg?: Prisma.ProductAvgOrderByAggregateInput
   _max?: Prisma.ProductMaxOrderByAggregateInput
@@ -317,6 +342,8 @@ export type ProductScalarWhereWithAggregatesInput = {
   available?: Prisma.BoolWithAggregatesFilter<"Product"> | boolean
   tag?: Prisma.StringNullableWithAggregatesFilter<"Product"> | string | null
   rating?: Prisma.FloatWithAggregatesFilter<"Product"> | number
+  minecraftCommands?: Prisma.StringWithAggregatesFilter<"Product"> | string
+  server?: Prisma.StringWithAggregatesFilter<"Product"> | string
 }
 
 export type ProductCreateInput = {
@@ -328,8 +355,11 @@ export type ProductCreateInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateInput = {
@@ -342,7 +372,10 @@ export type ProductUncheckedCreateInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
   orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductUpdateInput = {
@@ -354,8 +387,11 @@ export type ProductUpdateInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateInput = {
@@ -368,7 +404,10 @@ export type ProductUncheckedUpdateInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyInput = {
@@ -381,6 +420,8 @@ export type ProductCreateManyInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
 }
 
 export type ProductUpdateManyMutationInput = {
@@ -392,6 +433,8 @@ export type ProductUpdateManyMutationInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductUncheckedUpdateManyInput = {
@@ -404,6 +447,8 @@ export type ProductUncheckedUpdateManyInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ProductListRelationFilter = {
@@ -426,6 +471,8 @@ export type ProductCountOrderByAggregateInput = {
   available?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  minecraftCommands?: Prisma.SortOrder
+  server?: Prisma.SortOrder
 }
 
 export type ProductAvgOrderByAggregateInput = {
@@ -443,6 +490,8 @@ export type ProductMaxOrderByAggregateInput = {
   available?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  minecraftCommands?: Prisma.SortOrder
+  server?: Prisma.SortOrder
 }
 
 export type ProductMinOrderByAggregateInput = {
@@ -455,6 +504,8 @@ export type ProductMinOrderByAggregateInput = {
   available?: Prisma.SortOrder
   tag?: Prisma.SortOrder
   rating?: Prisma.SortOrder
+  minecraftCommands?: Prisma.SortOrder
+  server?: Prisma.SortOrder
 }
 
 export type ProductSumOrderByAggregateInput = {
@@ -465,6 +516,11 @@ export type ProductSumOrderByAggregateInput = {
 export type ProductScalarRelationFilter = {
   is?: Prisma.ProductWhereInput
   isNot?: Prisma.ProductWhereInput
+}
+
+export type ProductNullableScalarRelationFilter = {
+  is?: Prisma.ProductWhereInput | null
+  isNot?: Prisma.ProductWhereInput | null
 }
 
 export type ProductCreateNestedManyWithoutCategoryInput = {
@@ -539,6 +595,22 @@ export type ProductUpdateOneRequiredWithoutOrderItemsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutOrderItemsInput, Prisma.ProductUpdateWithoutOrderItemsInput>, Prisma.ProductUncheckedUpdateWithoutOrderItemsInput>
 }
 
+export type ProductCreateNestedOneWithoutDeliveriesInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutDeliveriesInput, Prisma.ProductUncheckedCreateWithoutDeliveriesInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutDeliveriesInput
+  connect?: Prisma.ProductWhereUniqueInput
+}
+
+export type ProductUpdateOneWithoutDeliveriesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProductCreateWithoutDeliveriesInput, Prisma.ProductUncheckedCreateWithoutDeliveriesInput>
+  connectOrCreate?: Prisma.ProductCreateOrConnectWithoutDeliveriesInput
+  upsert?: Prisma.ProductUpsertWithoutDeliveriesInput
+  disconnect?: Prisma.ProductWhereInput | boolean
+  delete?: Prisma.ProductWhereInput | boolean
+  connect?: Prisma.ProductWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProductUpdateToOneWithWhereWithoutDeliveriesInput, Prisma.ProductUpdateWithoutDeliveriesInput>, Prisma.ProductUncheckedUpdateWithoutDeliveriesInput>
+}
+
 export type ProductCreateWithoutCategoryInput = {
   id?: string
   name: string
@@ -548,7 +620,10 @@ export type ProductCreateWithoutCategoryInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
   orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutCategoryInput = {
@@ -560,7 +635,10 @@ export type ProductUncheckedCreateWithoutCategoryInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
   orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutCategoryInput = {
@@ -601,6 +679,8 @@ export type ProductScalarWhereInput = {
   available?: Prisma.BoolFilter<"Product"> | boolean
   tag?: Prisma.StringNullableFilter<"Product"> | string | null
   rating?: Prisma.FloatFilter<"Product"> | number
+  minecraftCommands?: Prisma.StringFilter<"Product"> | string
+  server?: Prisma.StringFilter<"Product"> | string
 }
 
 export type ProductCreateWithoutOrderItemsInput = {
@@ -612,7 +692,10 @@ export type ProductCreateWithoutOrderItemsInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
   category: Prisma.CategoryCreateNestedOneWithoutProductsInput
+  deliveries?: Prisma.DeliveryCreateNestedManyWithoutProductInput
 }
 
 export type ProductUncheckedCreateWithoutOrderItemsInput = {
@@ -625,6 +708,9 @@ export type ProductUncheckedCreateWithoutOrderItemsInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
+  deliveries?: Prisma.DeliveryUncheckedCreateNestedManyWithoutProductInput
 }
 
 export type ProductCreateOrConnectWithoutOrderItemsInput = {
@@ -652,7 +738,10 @@ export type ProductUpdateWithoutOrderItemsInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
   category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutOrderItemsInput = {
@@ -665,6 +754,85 @@ export type ProductUncheckedUpdateWithoutOrderItemsInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutProductNestedInput
+}
+
+export type ProductCreateWithoutDeliveriesInput = {
+  id?: string
+  name: string
+  description: string
+  price: number
+  image: string
+  available?: boolean
+  tag?: string | null
+  rating?: number
+  minecraftCommands?: string
+  server?: string
+  category: Prisma.CategoryCreateNestedOneWithoutProductsInput
+  orderItems?: Prisma.OrderItemCreateNestedManyWithoutProductInput
+}
+
+export type ProductUncheckedCreateWithoutDeliveriesInput = {
+  id?: string
+  name: string
+  categoryId: string
+  description: string
+  price: number
+  image: string
+  available?: boolean
+  tag?: string | null
+  rating?: number
+  minecraftCommands?: string
+  server?: string
+  orderItems?: Prisma.OrderItemUncheckedCreateNestedManyWithoutProductInput
+}
+
+export type ProductCreateOrConnectWithoutDeliveriesInput = {
+  where: Prisma.ProductWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProductCreateWithoutDeliveriesInput, Prisma.ProductUncheckedCreateWithoutDeliveriesInput>
+}
+
+export type ProductUpsertWithoutDeliveriesInput = {
+  update: Prisma.XOR<Prisma.ProductUpdateWithoutDeliveriesInput, Prisma.ProductUncheckedUpdateWithoutDeliveriesInput>
+  create: Prisma.XOR<Prisma.ProductCreateWithoutDeliveriesInput, Prisma.ProductUncheckedCreateWithoutDeliveriesInput>
+  where?: Prisma.ProductWhereInput
+}
+
+export type ProductUpdateToOneWithWhereWithoutDeliveriesInput = {
+  where?: Prisma.ProductWhereInput
+  data: Prisma.XOR<Prisma.ProductUpdateWithoutDeliveriesInput, Prisma.ProductUncheckedUpdateWithoutDeliveriesInput>
+}
+
+export type ProductUpdateWithoutDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  category?: Prisma.CategoryUpdateOneRequiredWithoutProductsNestedInput
+  orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
+}
+
+export type ProductUncheckedUpdateWithoutDeliveriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.FloatFieldUpdateOperationsInput | number
+  image?: Prisma.StringFieldUpdateOperationsInput | string
+  available?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
+  orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductCreateManyCategoryInput = {
@@ -676,6 +844,8 @@ export type ProductCreateManyCategoryInput = {
   available?: boolean
   tag?: string | null
   rating?: number
+  minecraftCommands?: string
+  server?: string
 }
 
 export type ProductUpdateWithoutCategoryInput = {
@@ -687,7 +857,10 @@ export type ProductUpdateWithoutCategoryInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
   orderItems?: Prisma.OrderItemUpdateManyWithoutProductNestedInput
+  deliveries?: Prisma.DeliveryUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateWithoutCategoryInput = {
@@ -699,7 +872,10 @@ export type ProductUncheckedUpdateWithoutCategoryInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
   orderItems?: Prisma.OrderItemUncheckedUpdateManyWithoutProductNestedInput
+  deliveries?: Prisma.DeliveryUncheckedUpdateManyWithoutProductNestedInput
 }
 
 export type ProductUncheckedUpdateManyWithoutCategoryInput = {
@@ -711,6 +887,8 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
   available?: Prisma.BoolFieldUpdateOperationsInput | boolean
   tag?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   rating?: Prisma.FloatFieldUpdateOperationsInput | number
+  minecraftCommands?: Prisma.StringFieldUpdateOperationsInput | string
+  server?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -720,10 +898,12 @@ export type ProductUncheckedUpdateManyWithoutCategoryInput = {
 
 export type ProductCountOutputType = {
   orderItems: number
+  deliveries: number
 }
 
 export type ProductCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   orderItems?: boolean | ProductCountOutputTypeCountOrderItemsArgs
+  deliveries?: boolean | ProductCountOutputTypeCountDeliveriesArgs
 }
 
 /**
@@ -743,6 +923,13 @@ export type ProductCountOutputTypeCountOrderItemsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.OrderItemWhereInput
 }
 
+/**
+ * ProductCountOutputType without action
+ */
+export type ProductCountOutputTypeCountDeliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeliveryWhereInput
+}
+
 
 export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -754,8 +941,11 @@ export type ProductSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   available?: boolean
   tag?: boolean
   rating?: boolean
+  minecraftCommands?: boolean
+  server?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
+  deliveries?: boolean | Prisma.Product$deliveriesArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -769,6 +959,8 @@ export type ProductSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   available?: boolean
   tag?: boolean
   rating?: boolean
+  minecraftCommands?: boolean
+  server?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -782,6 +974,8 @@ export type ProductSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   available?: boolean
   tag?: boolean
   rating?: boolean
+  minecraftCommands?: boolean
+  server?: boolean
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["product"]>
 
@@ -795,12 +989,15 @@ export type ProductSelectScalar = {
   available?: boolean
   tag?: boolean
   rating?: boolean
+  minecraftCommands?: boolean
+  server?: boolean
 }
 
-export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "categoryId" | "description" | "price" | "image" | "available" | "tag" | "rating", ExtArgs["result"]["product"]>
+export type ProductOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "categoryId" | "description" | "price" | "image" | "available" | "tag" | "rating" | "minecraftCommands" | "server", ExtArgs["result"]["product"]>
 export type ProductInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.CategoryDefaultArgs<ExtArgs>
   orderItems?: boolean | Prisma.Product$orderItemsArgs<ExtArgs>
+  deliveries?: boolean | Prisma.Product$deliveriesArgs<ExtArgs>
   _count?: boolean | Prisma.ProductCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProductIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -815,6 +1012,7 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     category: Prisma.$CategoryPayload<ExtArgs>
     orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
+    deliveries: Prisma.$DeliveryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -826,6 +1024,8 @@ export type $ProductPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     available: boolean
     tag: string | null
     rating: number
+    minecraftCommands: string
+    server: string
   }, ExtArgs["result"]["product"]>
   composites: {}
 }
@@ -1222,6 +1422,7 @@ export interface Prisma__ProductClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   category<T extends Prisma.CategoryDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CategoryDefaultArgs<ExtArgs>>): Prisma.Prisma__CategoryClient<runtime.Types.Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   orderItems<T extends Prisma.Product$orderItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deliveries<T extends Prisma.Product$deliveriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Product$deliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1260,6 +1461,8 @@ export interface ProductFieldRefs {
   readonly available: Prisma.FieldRef<"Product", 'Boolean'>
   readonly tag: Prisma.FieldRef<"Product", 'String'>
   readonly rating: Prisma.FieldRef<"Product", 'Float'>
+  readonly minecraftCommands: Prisma.FieldRef<"Product", 'String'>
+  readonly server: Prisma.FieldRef<"Product", 'String'>
 }
     
 
@@ -1680,6 +1883,30 @@ export type Product$orderItemsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.OrderItemScalarFieldEnum | Prisma.OrderItemScalarFieldEnum[]
+}
+
+/**
+ * Product.deliveries
+ */
+export type Product$deliveriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Delivery
+   */
+  select?: Prisma.DeliverySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Delivery
+   */
+  omit?: Prisma.DeliveryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeliveryInclude<ExtArgs> | null
+  where?: Prisma.DeliveryWhereInput
+  orderBy?: Prisma.DeliveryOrderByWithRelationInput | Prisma.DeliveryOrderByWithRelationInput[]
+  cursor?: Prisma.DeliveryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeliveryScalarFieldEnum | Prisma.DeliveryScalarFieldEnum[]
 }
 
 /**

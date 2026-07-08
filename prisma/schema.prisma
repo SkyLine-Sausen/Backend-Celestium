@@ -16,57 +16,91 @@ enum Role {
 }
 
 model User {
-  id       String  @id @default(uuid())
+  id       String @id @default(uuid())
   nickname String
-  email    String  @unique
+  email    String @unique
   password String
-  role     Role    @default(CUSTOMER)
-  orders   Order[]
+  role     Role   @default(CUSTOMER)
+
+  orders Order[]
 }
 
 model Category {
-  id       String    @id
-  label    String
-  icon     String
+  id    String @id
+  label String
+  icon  String
+
   products Product[]
 }
 
 model Product {
-  id          String      @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
   categoryId  String
-  category    Category    @relation(fields: [categoryId], references: [id])
+  category    Category @relation(fields: [categoryId], references: [id])
   description String
   price       Float
   image       String
-  available   Boolean     @default(true)
+  available   Boolean  @default(true)
   tag         String?
-  rating      Float       @default(0.0)
-  orderItems  OrderItem[]
+  rating      Float    @default(0.0)
+
+  // Comandos que o plugin Minecraft vai executar.
+  // É uma String com JSON dentro.
+  // Exemplo:
+  // ["say Entrega teste VIP para {player}"]
+  minecraftCommands String @default("[]")
+
+  // Nome do servidor. Para um servidor só, deixa "main".
+  server String @default("main")
+
+  orderItems OrderItem[]
+  deliveries Delivery[]
 }
 
 model OrderStatus {
-  id                Int           @id @default(autoincrement())
-  status            String        @unique
-  label             String
-  color             String
-  icon              String
-  next              String?
-  nextStatusId      Int? // Chave estrangeira para o próximo status
+  id           Int    @id @default(autoincrement())
+  status       String @unique
+  label        String
+  color        String
+  icon         String
+  next         String?
+  nextStatusId Int?
+
   next_status       OrderStatus?  @relation("NextStatus", fields: [nextStatusId], references: [id])
   previous_statuses OrderStatus[] @relation("NextStatus")
-  orders            Order[]
+
+  orders Order[]
 }
 
 model Order {
   id        String      @id @default(uuid())
   userId    String
   user      User        @relation(fields: [userId], references: [id])
-  statusId  Int         @default(1) // PENDING
+  statusId  Int         @default(1)
   status    OrderStatus @relation(fields: [statusId], references: [id])
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
-  items     OrderItem[]
+
+  items OrderItem[]
+
+  // Nick do jogador no Minecraft.
+  // Opcional por enquanto para não quebrar pedidos antigos.
+  playerName String?
+
+  // ID da cobrança/pagamento na AbacatePay.
+  abacatepayId String? @unique
+
+  // Status do pagamento.
+  // pending = ainda não pagou
+  // paid = pagamento confirmado
+  paymentStatus String @default("pending")
+
+  // Data em que o pagamento foi confirmado.
+  paidAt DateTime?
+
+  // Entregas geradas a partir desse pedido.
+  deliveries Delivery[]
 }
 
 model OrderItem {
@@ -77,4 +111,37 @@ model OrderItem {
   product   Product @relation(fields: [productId], references: [id])
   quantity  Int
   value     Float   @default(0)
+}
+
+model Delivery {
+  id String @id @default(uuid())
+
+  // Nick que vai receber o produto no Minecraft.
+  playerName String
+
+  // Pedido que gerou essa entrega.
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id])
+
+  // Produto comprado.
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id])
+
+  // Comandos que serão executados no console do Minecraft.
+  // É uma String com JSON dentro.
+  // Exemplo:
+  // ["say Entrega teste VIP para {player}"]
+  minecraftCommands String @default("[]")
+
+  // Servidor alvo. Para um servidor só, usa "main".
+  server String @default("main")
+
+  // pending = esperando o jogador entrar/estar online
+  // delivered = já entregue
+  status String @default("pending")
+
+  createdAt   DateTime  @default(now())
+  deliveredAt DateTime?
+
+  @@index([server, status])
 }

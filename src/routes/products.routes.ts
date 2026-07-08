@@ -6,7 +6,7 @@ import { allowRoles } from "../middleware/role.middleware.js"
 const productsRouter = express.Router()
 const productsController = new ProductsController()
 
-productsRouter.get("/", authMiddleware, productsController.getProducts)
+productsRouter.get("/",  productsController.getProducts)
 productsRouter.post("/", authMiddleware, allowRoles("ADMIN"), productsController.createProduct)
 productsRouter.put("/:id", authMiddleware, allowRoles("ADMIN"), productsController.updateProduct)
 

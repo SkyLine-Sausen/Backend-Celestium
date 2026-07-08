@@ -56,7 +56,8 @@ export const ModelName = {
   Product: 'Product',
   OrderStatus: 'OrderStatus',
   Order: 'Order',
-  OrderItem: 'OrderItem'
+  OrderItem: 'OrderItem',
+  Delivery: 'Delivery'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -101,7 +102,9 @@ export const ProductScalarFieldEnum = {
   image: 'image',
   available: 'available',
   tag: 'tag',
-  rating: 'rating'
+  rating: 'rating',
+  minecraftCommands: 'minecraftCommands',
+  server: 'server'
 } as const
 
 export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
@@ -125,7 +128,11 @@ export const OrderScalarFieldEnum = {
   userId: 'userId',
   statusId: 'statusId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  playerName: 'playerName',
+  abacatepayId: 'abacatepayId',
+  paymentStatus: 'paymentStatus',
+  paidAt: 'paidAt'
 } as const
 
 export type OrderScalarFieldEnum = (typeof OrderScalarFieldEnum)[keyof typeof OrderScalarFieldEnum]
@@ -140,6 +147,21 @@ export const OrderItemScalarFieldEnum = {
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+export const DeliveryScalarFieldEnum = {
+  id: 'id',
+  playerName: 'playerName',
+  orderId: 'orderId',
+  productId: 'productId',
+  minecraftCommands: 'minecraftCommands',
+  server: 'server',
+  status: 'status',
+  createdAt: 'createdAt',
+  deliveredAt: 'deliveredAt'
+} as const
+
+export type DeliveryScalarFieldEnum = (typeof DeliveryScalarFieldEnum)[keyof typeof DeliveryScalarFieldEnum]
 
 
 export const SortOrder = {
