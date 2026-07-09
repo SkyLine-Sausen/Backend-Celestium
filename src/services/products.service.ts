@@ -32,4 +32,10 @@ export class ProductsService {
              where: {id}, data: {name, categoryId, description, price, image, available, tag, rating}
             });
     }
+
+  async delete(id: string) {
+    return await prisma.product.delete({
+      where: { id },
+    })
+  }
 }

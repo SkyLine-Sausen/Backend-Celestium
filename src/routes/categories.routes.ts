@@ -8,7 +8,7 @@ const categoriesController = new CategoriesController()
 
 categoriesRouter.get("/", authMiddleware, categoriesController.getCategories)
 categoriesRouter.post("/", authMiddleware, allowRoles("ADMIN"), categoriesController.createCategories)
-
+categoriesRouter.delete("/", authMiddleware, allowRoles("ADMIN"), categoriesController.deleteCategories)
 
 
 export default categoriesRouter

@@ -65,7 +65,7 @@ export class UserController {
       return res.json(userWithoutPassword)
     } catch (err) {
       // console.log(err)
-      return res.status(500).json({ error: "Erro ao atualizar usuários" })
+      return res.status(500).json({ error: "Erro ao atualizar usuário" })
     }
   }
 
@@ -78,7 +78,7 @@ export class UserController {
       return res.status(204).send()
     } catch (err) {
       console.log(err)
-      return res.status(500).json({ error: "Erro ao remover usuários" })
+      return res.status(500).json({ error: "Erro ao remover usuário" })
     }
   }
 }

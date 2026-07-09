@@ -9,5 +9,6 @@ const productsController = new ProductsController()
 productsRouter.get("/",  productsController.getProducts)
 productsRouter.post("/", authMiddleware, allowRoles("ADMIN"), productsController.createProduct)
 productsRouter.put("/:id", authMiddleware, allowRoles("ADMIN"), productsController.updateProduct)
+productsRouter.delete("/:id", authMiddleware, allowRoles("ADMIN"), productsController.deleteProduct)
 
 export default productsRouter
